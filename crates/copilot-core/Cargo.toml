@@ -1,0 +1,11 @@
+[package]
+name = "copilot-core"
+description = "Shared types for GNOME Copilot: model catalog, config, paths, D-Bus names"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+toml = "0.9"
+anyhow = { workspace = true }
