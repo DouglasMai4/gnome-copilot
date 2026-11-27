@@ -1,0 +1,271 @@
+#!/usr/bin/env python3
+\
+\
+\
+\
+\
+
+import pathlib, string
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent / "extension" / "gnome-copilot@gnome-copilot.github.io"
+
+PALETTES = {
+    "dark": dict(fg="#ffffff", dim="rgba(255, 255, 255, 0.7)", card="#47474c", card_hover="st-lighten(#47474c, 4%)",
+                 icon_bg="rgba(255, 255, 255, 0.12)", track="rgba(255, 255, 255, 0.15)",
+                 error="#ff938c", error_bg="st-mix(#c01c28, #47474c, 22%)",
+                 notch="rgba(255, 255, 255, 0.72)", notch_ring="rgba(0, 0, 0, 0.45)", button_bg="rgba(255, 255, 255, 0.15)"),
+    "light": dict(fg="#222226", dim="rgba(34, 34, 38, 0.7)", card="#ffffff", card_hover="st-darken(#ffffff, 3%)",
+                  icon_bg="rgba(34, 34, 38, 0.08)", track="rgba(34, 34, 38, 0.12)",
+                  error="#c01c28", error_bg="st-mix(#e01b24, #ffffff, 12%)",
+                  notch="rgba(34, 34, 38, 0.6)", notch_ring="rgba(255, 255, 255, 0.75)", button_bg="rgba(34, 34, 38, 0.08)"),
+}
+
+TEMPLATE = string.Template("""
+.copilot-notch-pill {
+  border-radius: 999px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+}
+.copilot-notch-pill.copilot-notch-dark {
+  background-color: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 0, 0, 0.45);
+}
+.copilot-notch-pill.copilot-notch-light {
+  background-color: rgba(34, 34, 38, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+.copilot-notch-pill:hover {
+  background-color: -st-accent-color;
+}
+.copilot-notch:focus .copilot-notch-pill {
+  border: 2px solid st-transparentize(st-mix(-st-accent-color, #ffffff, 60%), 0.2);
+}
+
+.copilot-menu {
+    width: 24.82em;
+}
+.copilot-panel {
+  spacing: 12px;
+  color: $fg;
+}
+.copilot-header {
+  spacing: 12px;
+}
+.copilot-model-pill {
+  padding: 0 14px 0 12px;
+  min-height: 2.4em;
+}
+.copilot-model-pill-box {
+  spacing: 8px;
+}
+.copilot-model-icon {
+  icon-size: 1.091em;
+}
+.copilot-entry {
+  border-radius: 999px;
+  padding: 0 6px 0 18px;
+  min-height: 3.273em;
+}
+.copilot-send {
+  border-radius: 999px;
+  padding: 7px;
+  margin-left: 6px;
+  color: -st-accent-fg-color;
+  background-color: -st-accent-color;
+}
+.copilot-send StIcon {
+  icon-size: 1.091em;
+}
+.copilot-send:hover {
+  background-color: st-lighten(-st-accent-color, 6%);
+}
+.copilot-send:active {
+  background-color: st-darken(-st-accent-color, 6%);
+}
+.copilot-send:focus {
+  box-shadow: inset 0 0 0 2px st-transparentize(-st-accent-fg-color, 0.4);
+}
+.copilot-send:insensitive {
+  color: $dim;
+  background-color: $button_bg;
+}
+.copilot-scroll {
+  max-height: 26em;
+    -st-vfade-offset: 24px;
+}
+.copilot-body {
+  spacing: 12px;
+}
+.copilot-history {
+    spacing: 8px;
+}
+.copilot-suggestion .quick-toggle-title {
+  font-weight: bold;
+}
+
+.copilot-turn {
+  spacing: 6px;
+}
+.copilot-request {
+  margin-left: 3em;
+  padding: 8px 14px;
+  border-radius: 18px 18px 6px 18px;
+  color: -st-accent-fg-color;
+  background-color: -st-accent-color;
+}
+.copilot-turn {
+  padding-top: 2px;
+}
+.copilot-card {
+  spacing: 12px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 24px;
+  background-color: $card;
+}
+.copilot-card-icon {
+  border-radius: 999px;
+  padding: 8px;
+  background-color: $icon_bg;
+}
+.copilot-card-icon StIcon {
+  icon-size: 1.091em;
+}
+.copilot-card-app-icon {
+  padding: 2px;
+  background-color: transparent;
+}
+.copilot-card-done .copilot-card-icon {
+  background-color: -st-accent-color;
+  color: -st-accent-fg-color;
+}
+.copilot-card-done .copilot-card-app-icon {
+  background-color: transparent;
+}
+.copilot-card-error {
+  background-color: $error_bg;
+}
+.copilot-card-error .copilot-card-subtitle {
+  color: $fg;
+}
+.copilot-card-text {
+  spacing: 2px;
+}
+.copilot-card-title {
+  font-weight: bold;
+}
+.copilot-card-subtitle {
+  color: $dim;
+  font-size: 0.909em;
+}
+.copilot-expand {
+  padding: 6px;
+}
+.copilot-meta {
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: $dim;
+  font-size: 0.818em;
+  font-feature-settings: "tnum";
+}
+.copilot-meta:hover, .copilot-meta:focus, .copilot-meta:checked {
+  background-color: $button_bg;
+}
+.copilot-details {
+  spacing: 4px;
+  padding: 10px 14px;
+  border-radius: 18px;
+  background-color: $card;
+  font-size: 0.909em;
+}
+.copilot-details-row {
+  spacing: 18px;
+}
+.copilot-details-key {
+  color: $dim;
+}
+.copilot-details-value {
+  font-feature-settings: "tnum";
+}
+.copilot-details-reasoning {
+  padding-top: 6px;
+  color: $dim;
+  font-style: italic;
+}
+.copilot-card-actions {
+  spacing: 6px;
+  padding-top: 8px;
+}
+
+.copilot-panel .notification-button {
+  border-radius: 999px;
+  padding: 6px 14px;
+  color: $fg;
+  background-color: $button_bg;
+}
+.copilot-panel .notification-button:hover {
+  background-color: st-transparentize($fg, 0.8);
+}
+.copilot-panel .copilot-primary {
+  color: -st-accent-fg-color;
+  background-color: -st-accent-color;
+}
+.copilot-panel .copilot-primary:hover {
+  background-color: st-lighten(-st-accent-color, 6%);
+}
+.copilot-panel .copilot-primary:active {
+  background-color: st-darken(-st-accent-color, 6%);
+}
+.copilot-panel .notification-button:focus {
+  box-shadow: inset 0 0 0 2px st-transparentize(st-mix(-st-accent-color, $fg, 60%), 0.2);
+}
+
+.copilot-setup {
+  spacing: 6px;
+  padding: 6px 6px 2px;
+}
+.copilot-setup-icon {
+  border-radius: 999px;
+  padding: 12px;
+  margin-bottom: 6px;
+  background-color: st-transparentize(-st-accent-color, 0.8);
+  color: -st-accent-color;
+}
+.copilot-setup-icon StIcon {
+  icon-size: 1.636em;
+}
+.copilot-setup-title {
+  font-weight: 800;
+  font-size: 1.182em;
+}
+.copilot-setup-body {
+  color: $dim;
+}
+.copilot-setup-caption {
+  color: $dim;
+  font-size: 0.909em;
+  font-feature-settings: "tnum";
+}
+.copilot-error {
+  color: $error;
+}
+.copilot-setup-actions {
+  spacing: 6px;
+  padding-top: 12px;
+}
+.copilot-progress {
+  height: 6px;
+  margin-top: 12px;
+  border-radius: 999px;
+  background-color: $track;
+}
+.copilot-progress-fill {
+  height: 6px;
+  border-radius: 999px;
+  background-color: -st-accent-color;
+}
+""")
+
+for name, palette in PALETTES.items():
+    (ROOT / f"stylesheet-{name}.css").write_text(TEMPLATE.substitute(name=name, **palette))
+
+(ROOT / "stylesheet.css").write_text((ROOT / "stylesheet-dark.css").read_text())
+print("ok")

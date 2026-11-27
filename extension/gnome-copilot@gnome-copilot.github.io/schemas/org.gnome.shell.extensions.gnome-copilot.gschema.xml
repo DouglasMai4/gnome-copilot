@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gnome-copilot">
+  <enum id="org.gnome.shell.extensions.gnome-copilot.TriggerMode">
+    <value nick="notch" value="0"/>
+    <value nick="tray" value="1"/>
+    <value nick="both" value="2"/>
+  </enum>
+  <enum id="org.gnome.shell.extensions.gnome-copilot.Side">
+    <value nick="left" value="0"/>
+    <value nick="right" value="1"/>
+  </enum>
+  <schema id="org.gnome.shell.extensions.gnome-copilot" path="/org/gnome/shell/extensions/gnome-copilot/">
+    <key name="trigger-mode" enum="org.gnome.shell.extensions.gnome-copilot.TriggerMode">
+      <default>'notch'</default>
+      <summary>How the Copilot panel is opened</summary>
+      <description>A notch on the screen edge, an icon in the top bar, or both.</description>
+    </key>
+    <key name="notch-side" enum="org.gnome.shell.extensions.gnome-copilot.Side">
+      <default>'right'</default>
+      <summary>Screen edge the notch is attached to</summary>
+    </key>
+    <key name="notch-position" type="d">
+      <range min="0" max="1"/>
+      <default>0.35</default>
+      <summary>Vertical position of the notch (0 = top of the work area, 1 = bottom)</summary>
+    </key>
+    <key name="toggle-shortcut" type="as">
+      <default><![CDATA[['<Super>c']]]></default>
+      <summary>Keyboard shortcut that opens the Copilot panel</summary>
+    </key>
+  </schema>
+</schemalist>

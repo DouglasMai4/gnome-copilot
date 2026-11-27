@@ -1,0 +1,9 @@
+{
+  "uuid": "gnome-copilot@gnome-copilot.github.io",
+  "name": "GNOME Copilot",
+  "description": "Assistente de IA local e privado. Peça ações ao sistema por um notch lateral ou pela barra superior; tudo roda no seu computador com os modelos Cactus.",
+  "shell-version": ["47", "48", "49", "50", "51"],
+  "settings-schema": "org.gnome.shell.extensions.gnome-copilot",
+  "url": "https://github.com/gnome-copilot/gnome-copilot",
+  "version-name": "0.1.0"
+}
