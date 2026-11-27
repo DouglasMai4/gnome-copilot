@@ -1,6 +1,18 @@
-[package]
-name = "gnome-copilot"
+[workspace]
+resolver = "3"
+members = ["crates/cactus", "crates/copilot-core", "crates/copilotd", "crates/copilot-settings"]
+
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
+license = "GPL-3.0-or-later"
 
-[dependencies]
+[workspace.dependencies]
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = "0.1"
+zbus = { version = "5", default-features = false, features = ["tokio"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "fs", "process", "time", "signal"] }
+cactus = { path = "crates/cactus" }
+copilot-core = { path = "crates/copilot-core" }
