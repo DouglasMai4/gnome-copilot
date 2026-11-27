@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Copilot
+Comment=Configure the local AI assistant
+Comment[pt_BR]=Configure o assistente de IA local
+Exec=@BINDIR@/copilot-settings
+Icon=io.github.GnomeCopilot-symbolic
+Terminal=false
+Categories=GNOME;GTK;Settings;Utility;
+Keywords=AI;assistant;copilot;needle;cactus;IA;assistente;
+StartupNotify=true
