@@ -1,0 +1,15 @@
+sleep|3
+init|Main.messageTray.bannerBlocked = true; Main.overview.hide(); new imports.gi.Gio.Settings({schema_id: 'org.gnome.desktop.interface'}).set_string('color-scheme', 'default'); 1
+sleep|2
+50-notch-default-scheme|1
+ask|const s = Main.extensionManager.lookup('gnome-copilot@gnome-copilot.github.io').stateObj; s._notchMenu.open(); 1
+sleep|1.5
+ask2|Main.extensionManager.lookup('gnome-copilot@gnome-copilot.github.io').stateObj._panel._submit('liga a luz noturna'); 1
+sleep|2.5
+fake|const p = Main.extensionManager.lookup('gnome-copilot@gnome-copilot.github.io').stateObj._panel; p._addTurn('lista os arquivos da pasta de ícones', {id: '', message: '', items: [{index: 0, action: 'run_command', title: 'Executar: ls /usr/share/icons', status: 'done', message: 'Adwaita\\nAdwaitaLegacy\\nbreeze\\ncursors\\ndefault\\nhicolor\\nlocolor\\nmate\\nPapirus\\nPapirus-Dark'}], stats: {model: 'Needle 3', total_ms: 412, inference_ms: 388, confidence: 0.94, prefill_tps: 361, decode_tps: 182, peak_ram_mb: 106, reasoning: "'lista os arquivos' -> run_command"}}); p._entry.text = 'abre o fir'; 1
+sleep|1
+51-chat|1
+open-details|const p = Main.extensionManager.lookup('gnome-copilot@gnome-copilot.github.io').stateObj._panel; const t = p._history.get_first_child(); const m = t.get_children().find(c => c.has_style_class_name?.('copilot-meta')); m.emit('clicked', 1); 1
+expand|const p = Main.extensionManager.lookup('gnome-copilot@gnome-copilot.github.io').stateObj._panel; const t = p._history.get_last_child(); const card = t.get_children().find(c => c.has_style_class_name?.('copilot-card')); card.get_children().find(c => c.has_style_class_name?.('copilot-expand')).emit('clicked', 1); 1
+sleep|1
+52-details-expanded|1

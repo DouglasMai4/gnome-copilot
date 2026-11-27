@@ -1,0 +1,1 @@
+{"uuid": "copilot-dev-unsafe@gnome-copilot.github.io", "name": "Copilot dev: unsafe mode", "description": "Test-only. Enables Shell.Eval/Screenshot in the headless sandbox used by tools/shot.sh. Never install in a real session.", "shell-version": ["47", "48", "49", "50", "51"]}
