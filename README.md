@@ -103,3 +103,9 @@ just uninstall
 ```
 
 Downloaded models stay in `~/.local/share/gnome-copilot`; delete that folder to remove them.
+
+## License
+
+[MIT](LICENSE).
+
+The Cactus engine and the Needle, Whistle and Mirage models are licensed under Apache-2.0 by [Cactus Compute](https://github.com/cactus-compute/cactus). They are not bundled: GNOME Copilot downloads them from Hugging Face on first use.
